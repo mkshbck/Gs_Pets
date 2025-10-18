@@ -1,0 +1,68 @@
+.dress-up-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.pet-display {
+    position: relative; /* Essential for containing the absolutely positioned outfit */
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+}
+
+/* Styles for the three outfit overlays on the dress-up page */
+#hat-overlay, #cape-overlay, #glasses-overlay {
+    position: absolute; /* Place the outfit on top of the pet */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    /* HIDDEN BY DEFAULT: JS will set display: 'block' when an outfit is selected */
+    display: none; 
+}
+
+.outfit-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.outfit-item {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.outfit-item:hover {
+    transform: scale(1.1);
+    border-color: #8a2be2;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#remove-all-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}

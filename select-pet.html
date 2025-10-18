@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Pet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .selection-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- STYLES FOR HORIZONTAL SCROLLING GALLERY --- */
+        .selection-grid {
+            display: flex;
+            overflow-x: scroll; 
+            gap: 20px;
+            padding: 20px 5px; 
+            margin-top: 30px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+        }
+        .selection-grid::-webkit-scrollbar {
+            display: none;
+        }
+        /* ------------------------------------------------ */
+
+        .pet-card {
+            flex-shrink: 0; 
+            width: 120px;
+            height: 150px;
+            text-align: center;
+            cursor: pointer;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: all 0.2s ease-in-out;
+            background-color: #f9f9f9;
+        }
+        .pet-card:hover {
+            border-color: #8a2be2;
+            transform: translateY(-5px); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pet-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 5px;
+        }
+        
+        /* Style for the back button (using existing button styles) */
+        .back-to-game-btn {
+            padding: 10px 20px;
+            margin: 20px 10px 0;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #3498db; /* Blue color */
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .back-to-game-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="pet-container selection-container">
+        <h1>Choose Your Pet Character!</h1>
+        
+        <div class="selection-grid">
+            
+            <div class="pet-card" data-pet="kitty">
+                <img src="images/animals/kitty/pet-neutral.png" alt="Kitty">
+                <h3>Kitty</h3>
+            </div>
+            <div class="pet-card" data-pet="sheep">
+                <img src="images/animals/sheep/pet-neutral.png" alt="Sheep">
+                <h3>Sheep</h3>
+            </div>
+            <div class="pet-card" data-pet="monkey">
+                <img src="images/animals/monkey/pet-neutral.png" alt="Monkey">
+                <h3>Monkey</h3>
+            </div>
+            <div class="pet-card" data-pet="cow">
+                <img src="images/animals/cow/pet-neutral.png" alt="Cow">
+                <h3>Cow</h3>
+            </div>
+            <div class="pet-card" data-pet="puppy">
+                <img src="images/animals/puppy/pet-neutral.png" alt="Puppy">
+                <h3>Puppy</h3>
+            </div>
+
+            <div class="pet-card" data-pet="bunny">
+                <img src="images/animals/bunny/pet-neutral.png" alt="Bunny">
+                <h3>Bunny</h3>
+            </div>
+            <div class="pet-card" data-pet="chick">
+                <img src="images/animals/chick/pet-neutral.png" alt="Chick">
+                <h3>Chick</h3>
+            </div>
+            <div class="pet-card" data-pet="dragon">
+                <img src="images/animals/dragon/pet-neutral.png" alt="Dragon">
+                <h3>Dragon</h3>
+            </div>
+            <div class="pet-card" data-pet="panda">
+                <img src="images/animals/panda/pet-neutral.png" alt="Panda">
+                <h3>Panda</h3>
+            </div>
+            <div class="pet-card" data-pet="unicorn">
+                <img src="images/animals/unicorn/pet-neutral.png" alt="Unicorn">
+                <h3>Unicorn</h3>
+            </div>
+            <div class="pet-card" data-pet="bear">
+                <img src="images/animals/bear/pet-neutral.png" alt="Bear">
+                <h3>Bear</h3>
+            </div>
+            <div class="pet-card" data-pet="fox">
+                <img src="images/animals/fox/pet-neutral.png" alt="Fox">
+                <h3>Fox</h3>
+            </div>
+            <div class="pet-card" data-pet="koala">
+                <img src="images/animals/koala/pet-neutral.png" alt="Koala">
+                <h3>Koala</h3>
+            </div>
+            <div class="pet-card" data-pet="jaguar">
+                <img src="images/animals/jaguar/pet-neutral.png" alt="Jaguar">
+                <h3>Jaguar</h3>
+            </div>
+            <div class="pet-card" data-pet="polarbear">
+                <img src="images/animals/polarbear/pet-neutral.png" alt="Polar Bear">
+                <h3>Polar Bear</h3>
+            </div>
+            
+        </div>
+        
+        <p style="margin-top: 30px;">Select an animal to start playing!</p>
+
+        <a href="index.html" class="back-to-game-btn">Back to Game</a>
+    </div>
+
+    <script>
+        document.querySelectorAll('.pet-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const petType = card.getAttribute('data-pet');
+                // 1. Save the pet choice to localStorage
+                localStorage.setItem('selectedPet', petType);
+                
+                // 2. Redirect to the main game page
+                window.location.href = 'index.html'; 
+            });
+        });
+    </script>
+</body>
+</html>

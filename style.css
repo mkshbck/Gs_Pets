@@ -1,0 +1,112 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    /* Change align-items to flex-start to allow content to sit at the top */
+    align-items: flex-start;
+    justify-content: center;
+    /* Remove height: 100vh; to allow the content to define the page height */
+    min-height: 100vh; /* Use min-height to ensure it fills the screen if content is short */
+    margin: 0;
+    /* Add padding to the top and bottom of the body for space */
+    padding: 20px 0; 
+    background-color: #f0e6f2; 
+}
+
+.pet-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pet-display {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* FIX: Added position: relative to contain absolute children (the outfit overlays) */
+    position: relative; 
+}
+
+/* Ensures the transform property is applied smoothly */
+#pet-image, #base-pet-image, #hat-overlay, #cape-overlay, #glasses-overlay {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* Styling for the dynamically added outfit overlays on the main page */
+#hat-overlay, #cape-overlay, #glasses-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Add transition for smooth movement between states */
+    transition: transform 0.3s ease-in-out; 
+}
+
+.pet-stats p {
+    margin: 5px 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* --- COMMON BUTTON STYLING --- */
+
+/* Style for the <button> tags (Feed, Play) */
+.controls button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    background-color: #8a2be2; 
+    transition: background-color 0.2s ease-in-out;
+}
+
+.controls button:hover {
+    background-color: #a350e9;
+}
+
+/* Style for the <a> tags (Dress Up!, Change Pet) */
+.dress-up-btn, .select-pet-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #fff;
+    text-decoration: none; /* Crucial for anchor tags */
+    display: inline-block; /* Crucial to allow padding and width on anchor tags */
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* --- UNIQUE BUTTON COLORS --- */
+
+/* Styling for the Dress Up link */
+.dress-up-btn {
+    background-color: #1abc9c; /* Green */
+}
+.dress-up-btn:hover {
+    background-color: #16a085;
+}
+
+/* Styling for the Change Pet link (Now uses the common <a> properties) */
+.select-pet-btn {
+    background-color: #3498db; /* Blue */
+}
+.select-pet-btn:hover {
+    background-color: #2980b9;
+}
