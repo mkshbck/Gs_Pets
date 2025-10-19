@@ -17,6 +17,9 @@ const petImageEl = document.getElementById('pet-image');
 const feedBtn = document.getElementById('feed-btn');
 const playBtn = document.getElementById('play-btn');
 
+// NEW: Variable to hold the loaded configuration data for the current pet
+let petConfigData = null;
+
 // NEW: Get the currently selected pet type from localStorage
 const selectedPet = localStorage.getItem('selectedPet') || 'kitty';
 
@@ -27,18 +30,27 @@ function getPetImagePath(state) {
     return `images/animals/${selectedPet}/pet-${state}.png`;
 }
 
-// --- GLASSES SHIFT DATA (Keys use "pet-" prefix) ---
-const glassesVerticalOffsets = {
-    'pet-strong.png': 0,    // 60% (Baseline)
-    'pet-play.png': -1,     // 59% -> 1% shift up
-    'pet-sad.png': -6,      // 54% -> 6% shift up
-    'pet-fat.png': -6,      // 54% -> 6% shift up
-    'pet-eating.png': -6,   // 54% -> 6% shift up
-    'pet-hungry.png': -8,   // 52% -> 8% shift up
-    'pet-neutral.png': -10, // 50% -> 10% shift up
-    'pet-dead.png': -19     // 41% -> 19% shift up
-};
-// --------------------------
+// --- NEW FUNCTION: Load Pet Configuration ---
+async function loadPetConfig() {
+    const configPath = `images/animals/${selectedPet}/config.json`;
+    try {
+        const response = await fetch(configPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load config for ${selectedPet}. 
+Status: ${response.status}`);
+        }
+        petConfigData = await response.json();
+        console.log("Pet configuration loaded successfully:", 
+petConfigData);
+        // Once config is loaded, update image and outfits to apply initial offsets
+        updateStats();
+    } catch (error) {
+        console.error("Error loading pet config:", error);
+        // Fallback: If config fails to load, accessories won't shift, but game will continue.
+    }
+}
+loadPetConfig(); // Execute on script load
+// ------------------------------------------
 
 
 // --- OUTFIT OVERLAY SETUP FOR MAIN PAGE (MULTI-ITEM LOGIC) ---
@@ -89,7 +101,6 @@ function updateStats() {
 // Change pet image based on its state, including weight and strength
 function updatePetImage() {
     let currentImageSrc;
-    let glassesElement = document.getElementById('glasses-overlay');
     
     // --- DETERMINE CURRENT PET STATE IMAGE ---
     // Uses the new helper function: getPetImagePath('state')
@@ -99,9 +110,13 @@ function updatePetImage() {
         currentImageSrc = getPetImagePath('fat'); 
     } else if (strength > 75) {
         currentImageSrc = getPetImagePath('strong'); 
-    } else if (hunger <= 30) {
+    } 
+    // CHANGE: Threshold updated from 30 to 50
+    else if (hunger <= 50) {
         currentImageSrc = getPetImagePath('hungry');
-    } else if (happiness <= 30) {
+    } 
+    // CHANGE: Threshold updated from 30 to 50
+    else if (happiness <= 50) {
         currentImageSrc = getPetImagePath('sad');
     } else {
         currentImageSrc = getPetImagePath('neutral');
@@ -109,16 +124,29 @@ function updatePetImage() {
 
     petImageEl.src = currentImageSrc;
 
-    // --- GLASSES SHIFT LOGIC ---
-    if (glassesElement) {
+    // 2. APPLY SHIFTS TO ALL ACCESSORIES
+    if (petConfigData) {
         // Extract the filename (e.g., 'pet-neutral.png')
         const filename = currentImageSrc.split('/').pop(); 
         
-        // Find the offset using the filename with "pet-" prefix
-        const offsetPercent = glassesVerticalOffsets[filename] || 0;
-        
-        // Apply the vertical shift using CSS transform: translateY
-        glassesElement.style.transform = `translateY(${offsetPercent}%)`;
+        const accessories = [
+            { id: 'hat-overlay', category: 'hat' },
+            { id: 'cape-overlay', category: 'cape' },
+            { id: 'glasses-overlay', category: 'glasses' }
+        ];
+
+        accessories.forEach(acc => {
+            const element = document.getElementById(acc.id);
+            if (element) {
+                // Get the offset from the loaded JSON data
+                const shiftY = petConfigData[acc.category]?.[filename] || 
+0;
+                
+                // Apply the vertical shift using CSS transform: 
+translateY
+                element.style.transform = `translateY(${shiftY}%)`;
+            }
+        });
     }
     // -------------------------------
 }
@@ -144,12 +172,13 @@ feedBtn.addEventListener('click', () => {
             hunger = 100;
             weight += 5; // Pet gains weight if hunger is already full
         }
-        updateStats();
+        updateStats(); // <--- This runs updatePetImage() immediately
     }
-    // Uses the new helper function
+    // Set the eating image for the animation
     petImageEl.src = getPetImagePath('eating'); 
     setTimeout(() => {
-        updateStats(); 
+        updateStats(); // <--- This runs updatePetImage() to set the final 
+state
     }, 1000);
 });
 
@@ -161,12 +190,13 @@ playBtn.addEventListener('click', () => {
             strength += 5; // Pet gains strength if happiness is already 
 full
         }
-        updateStats();
+        updateStats(); // <--- This runs updatePetImage() immediately
     }
-    // Uses the new helper function
+    // Set the play image for the animation
     petImageEl.src = getPetImagePath('play'); 
     setTimeout(() => {
-        updateStats(); 
+        updateStats(); // <--- This runs updatePetImage() to set the final 
+state
     }, 1000);
 });
 
