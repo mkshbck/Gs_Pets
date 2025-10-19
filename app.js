@@ -40,8 +40,7 @@ async function loadPetConfig() {
 Status: ${response.status}`);
         }
         petConfigData = await response.json();
-        console.log("Pet configuration loaded successfully:", 
-petConfigData);
+        console.log("Pet configuration loaded successfully:", petConfigData);
         // Once config is loaded, update image and outfits to apply initial offsets
         updateStats();
     } catch (error) {
@@ -139,11 +138,9 @@ function updatePetImage() {
             const element = document.getElementById(acc.id);
             if (element) {
                 // Get the offset from the loaded JSON data
-                const shiftY = petConfigData[acc.category]?.[filename] || 
-0;
+                const shiftY = petConfigData[acc.category]?.[filename] || 0;
                 
-                // Apply the vertical shift using CSS transform: 
-translateY
+                // Apply the vertical shift using CSS transform: translateY
                 element.style.transform = `translateY(${shiftY}%)`;
             }
         });
@@ -177,8 +174,7 @@ feedBtn.addEventListener('click', () => {
     // Set the eating image for the animation
     petImageEl.src = getPetImagePath('eating'); 
     setTimeout(() => {
-        updateStats(); // <--- This runs updatePetImage() to set the final 
-state
+        updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
 });
 
@@ -187,16 +183,14 @@ playBtn.addEventListener('click', () => {
         happiness += 10;
         if (happiness > 100) {
             happiness = 100;
-            strength += 5; // Pet gains strength if happiness is already 
-full
+            strength += 5; // Pet gains strength if happiness is already full
         }
         updateStats(); // <--- This runs updatePetImage() immediately
     }
     // Set the play image for the animation
     petImageEl.src = getPetImagePath('play'); 
     setTimeout(() => {
-        updateStats(); // <--- This runs updatePetImage() to set the final 
-state
+        updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
 });
 
