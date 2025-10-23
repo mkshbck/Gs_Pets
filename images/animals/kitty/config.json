@@ -20,13 +20,13 @@
     "pet-dead.png": 0
   },
   "cape": {
-    "pet-neutral.png": 0,
-    "pet-hungry.png": 0,
-    "pet-sad.png": 0,
-    "pet-fat.png": 0,
+    "pet-neutral.png": 10,
+    "pet-hungry.png": 10,
+    "pet-sad.png": 10,
+    "pet-fat.png": 5,
     "pet-strong.png": 0,
-    "pet-eating.png": 0,
+    "pet-eating.png": 5,
     "pet-play.png": 0,
-    "pet-dead.png": 0
+    "pet-dead.png": 10
   }
 }
