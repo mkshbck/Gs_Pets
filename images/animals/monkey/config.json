@@ -6,7 +6,7 @@
     "pet-fat.png": 6,
     "pet-strong.png":0,
     "pet-eating.png": 0,
-    "pet-play.png": 0,
+    "pet-play.png": 5,
     "pet-dead.png": 18
   },
   "hat": {
@@ -25,7 +25,7 @@
     "pet-sad.png": 17,
     "pet-fat.png": 10,
     "pet-strong.png": 0,
-    "pet-eating.png": 0,
+    "pet-eating.png": 10,
     "pet-play.png": 10,
     "pet-dead.png": 20
   }
