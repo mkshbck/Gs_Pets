@@ -1,5 +1,5 @@
 {
-"glasses": {
+  "glasses": {
     "pet-neutral.png": 10,
     "pet-hungry.png": 8,
     "pet-sad.png": 6,
@@ -7,26 +7,26 @@
     "pet-strong.png":0,
     "pet-eating.png": 0,
     "pet-play.png": 0,
-    "pet-dead.png": 19
+    "pet-dead.png": 18
   },
   "hat": {
-    "pet-neutral.png": -12,
-    "pet-hungry.png": -10,
-    "pet-sad.png": -8,
-    "pet-fat.png": -8,
-    "pet-strong.png": -2,
-    "pet-eating.png": -8,
-    "pet-play.png": -4,
-    "pet-dead.png": -20
-  },
-  "cape": {
-    "pet-neutral.png": 0,
-    "pet-hungry.png": 0,
-    "pet-sad.png": 0,
+    "pet-neutral.png": 2,
+    "pet-hungry.png": 2,
+    "pet-sad.png": -2,
     "pet-fat.png": 0,
     "pet-strong.png": 0,
     "pet-eating.png": 0,
     "pet-play.png": 0,
-    "pet-dead.png": 0
+    "pet-dead.png": 5
+  },
+  "cape": {
+    "pet-neutral.png": 17,
+    "pet-hungry.png": 17,
+    "pet-sad.png": 17,
+    "pet-fat.png": 10,
+    "pet-strong.png": 0,
+    "pet-eating.png": 0,
+    "pet-play.png": 10,
+    "pet-dead.png": 20
   }
 }
