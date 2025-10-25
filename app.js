@@ -199,7 +199,7 @@ feedBtn.addEventListener('click', () => {
     }
     // Set the eating image for the animation
     petImageEl.src = getPetImagePath('eating'); 
-    shiftAccessories();//added shift logic mps
+    shiftAccessories(petImageEl.src );//added shift logic mps
     setTimeout(() => {
         updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
@@ -216,7 +216,7 @@ playBtn.addEventListener('click', () => {
     }
     // Set the play image for the animation
     petImageEl.src = getPetImagePath('play'); 
-    shiftAccessories();//added shift logic mps
+    shiftAccessories(petImageEl.src );//added shift logic mps
     setTimeout(() => {
         updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
