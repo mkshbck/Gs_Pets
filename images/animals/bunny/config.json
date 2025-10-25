@@ -10,16 +10,6 @@
     "pet-dead.png": 19
   },
   "hat": {
-    "pet-neutral.png": -12,
-    "pet-hungry.png": -10,
-    "pet-sad.png": -8,
-    "pet-fat.png": -8,
-    "pet-strong.png": -2,
-    "pet-eating.png": -8,
-    "pet-play.png": -4,
-    "pet-dead.png": -20
-  },
-  "cape": {
     "pet-neutral.png": 0,
     "pet-hungry.png": 0,
     "pet-sad.png": 0,
@@ -28,5 +18,15 @@
     "pet-eating.png": 0,
     "pet-play.png": 0,
     "pet-dead.png": 0
+  },
+  "cape": {
+    "pet-neutral.png": 15,
+    "pet-hungry.png": 15,
+    "pet-sad.png": 15,
+    "pet-fat.png": 10,
+    "pet-strong.png": 0,
+    "pet-eating.png": 10,
+    "pet-play.png": 0,
+    "pet-dead.png": 15
   }
 }
