@@ -146,12 +146,12 @@ function updatePetImage() {
           
         });
     }*/
-    shiftAccessories();//this is the new shift logic
+    shiftAccessories(currentImageSrc);//this is the new shift logic
     // -------------------------------
 }
 
 //MOVEED THE SHIFT LOGIC TO THIS FUNCTION
-function shiftAccessories(){
+function shiftAccessories(currentImageSrc){
     if (petConfigData) {
         // Extract the filename (e.g., 'pet-neutral.png')
         const filename = currentImageSrc.split('/').pop(); 
