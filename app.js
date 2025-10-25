@@ -123,7 +123,35 @@ function updatePetImage() {
 
     petImageEl.src = currentImageSrc;
 
-    // 2. APPLY SHIFTS TO ALL ACCESSORIES
+    // 2. APPLY SHIFTS TO ALL ACCESSORIES - SHIFTING CODE NEVER HAPPENS FOR PLAY OR EATING STATES SO THIS SHOULD MOVE TO A FUNCTION
+/*    if (petConfigData) {
+        // Extract the filename (e.g., 'pet-neutral.png')
+        const filename = currentImageSrc.split('/').pop(); 
+        
+        const accessories = [
+            { id: 'hat-overlay', category: 'hat' },
+            { id: 'cape-overlay', category: 'cape' },
+            { id: 'glasses-overlay', category: 'glasses' }
+        ];
+
+        accessories.forEach(acc => {
+            const element = document.getElementById(acc.id);
+            if (element) {
+                // Get the offset from the loaded JSON data
+                const shiftY = petConfigData[acc.category]?.[filename] || 0;
+                
+                // Apply the vertical shift using CSS transform: translateY
+                element.style.transform = `translateY(${shiftY}%)`;
+            }
+          
+        });
+    }*/
+    shiftAccessories();//this is the new shift logic
+    // -------------------------------
+}
+
+//MOVEED THE SHIFT LOGIC TO THIS FUNCTION
+function shiftAccessories(){
     if (petConfigData) {
         // Extract the filename (e.g., 'pet-neutral.png')
         const filename = currentImageSrc.split('/').pop(); 
@@ -145,9 +173,7 @@ function updatePetImage() {
             }
         });
     }
-    // -------------------------------
 }
-
 // Check for death conditions
 function checkPetStatus() {
     // Pet dies if hunger/happiness hits 0 OR if weight hits 100
@@ -173,6 +199,7 @@ feedBtn.addEventListener('click', () => {
     }
     // Set the eating image for the animation
     petImageEl.src = getPetImagePath('eating'); 
+    shiftAccessories();//added shift logic mps
     setTimeout(() => {
         updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
@@ -189,6 +216,7 @@ playBtn.addEventListener('click', () => {
     }
     // Set the play image for the animation
     petImageEl.src = getPetImagePath('play'); 
+    shiftAccessories();//added shift logic mps
     setTimeout(() => {
         updateStats(); // <--- This runs updatePetImage() to set the final state
     }, 1000);
