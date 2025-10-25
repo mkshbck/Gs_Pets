@@ -10,9 +10,9 @@
     "pet-dead.png": 18
   },
   "hat": {
-    "pet-neutral.png": 2,
-    "pet-hungry.png": 2,
-    "pet-sad.png": -2,
+    "pet-neutral.png": 6,
+    "pet-hungry.png": 6,
+    "pet-sad.png": 6,
     "pet-fat.png": 0,
     "pet-strong.png": 0,
     "pet-eating.png": 0,
