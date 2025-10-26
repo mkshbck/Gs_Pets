@@ -1,6 +1,6 @@
 {
   "glasses": {
-    "pet-neutral.png": 10,
+    "pet-neutral.png": 18,
     "pet-hungry.png": 8,
     "pet-sad.png": 6,
     "pet-fat.png": 6,
@@ -10,7 +10,7 @@
     "pet-dead.png": 18
   },
   "hat": {
-    "pet-neutral.png": 2,
+    "pet-neutral.png": 10,
     "pet-hungry.png": 2,
     "pet-sad.png": -2,
     "pet-fat.png": 0,
