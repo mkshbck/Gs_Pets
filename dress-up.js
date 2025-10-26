@@ -9,16 +9,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const glassesOverlayEl = document.getElementById('glasses-overlay');
     const removeAllBtn = document.getElementById('remove-all-btn'); 
 
-    // --- Dynamic Pet Image Setup ---
     const basePetImageEl = document.getElementById('base-pet-image');
-    
-    // IMPORTANT: Fetch the selected pet type. Default to 'kitty' if none is set.
     const selectedPet = localStorage.getItem('selectedPet') || 'kitty';
 
-    // Set the base pet image source using the dynamic pet type and the 'pet-neutral.png' file
+    // Set the base pet image source
     basePetImageEl.src = `images/animals/${selectedPet}/pet-neutral.png`;
-    // -------------------------------
     
+    // --- NEW: Function to load config and apply shifts ---
+    async function loadAndApplyShifts() {
+        const configPath = `images/animals/${selectedPet}/config.json`;
+        try {
+            const response = await fetch(configPath);
+            if (!response.ok) {
+                throw new Error(`Failed to load config for ${selectedPet}. Status: ${response.status}`);
+            }
+            const configData = await response.json();
+
+            // We apply the shifts for the static 'pet-neutral.png' state
+            const filename = 'pet-neutral.png'; 
+
+            const accessories = [
+                { element: hatOverlayEl, category: 'hat' },
+                { element: capeOverlayEl, category: 'cape' },
+                { element: glassesOverlayEl, category: 'glasses' }
+            ];
+
+            accessories.forEach(acc => {
+                const element = acc.element;
+                
+                // Get the shift object. Default to {x:0, y:0, r:0} if state is missing.
+                const shiftData = configData[acc.category]?.[filename] || { x: 0, y: 0, r: 0 };
+                
+                const shiftX = shiftData.x || 0;
+                const shiftY = shiftData.y || 0;
+                const rotate = shiftData.r || 0;
+                
+                // Apply the combined transformation
+                element.style.transform = 
+                    `translateX(${shiftX}%) translateY(${shiftY}%) rotate(${rotate}deg)`;
+            });
+
+        } catch (error) {
+            console.error("Error loading pet config for dress-up page:", error);
+            // If fetching fails, accessories will remain unshifted (at their default position).
+        }
+    }
+    
+    // Execute the shift loading function immediately
+    loadAndApplyShifts();
+    // -----------------------------------------------------
+
 
     // Helper function to get the category from the data-outfit attribute
     function getCategory(outfitId) {
@@ -28,13 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Function to load the saved outfits and control visibility
+    // Function to load the saved outfits and control visibility (Remains the same)
     function loadSavedOutfits() {
         const hatSrc = localStorage.getItem('petHat');
         const capeSrc = localStorage.getItem('petCape');
         const glassesSrc = localStorage.getItem('petGlasses');
 
-        // Display/Hide each item based on local storage
         if (hatSrc) { hatOverlayEl.src = hatSrc; hatOverlayEl.style.display = 'block'; } else { hatOverlayEl.style.display = 'none'; }
         if (capeSrc) { capeOverlayEl.src = capeSrc; capeOverlayEl.style.display = 'block'; } else { capeOverlayEl.style.display = 'none'; }
         if (glassesSrc) { glassesOverlayEl.src = glassesSrc; glassesOverlayEl.style.display = 'block'; } else { glassesOverlayEl.style.display = 'none'; }
@@ -42,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadSavedOutfits(); // Load all three items on page load
 
-    // Add click listeners to outfit items
+    // Add click listeners to outfit items (Remains the same)
     outfitItems.forEach(item => {
         item.addEventListener('click', () => {
-            const outfitId = item.getAttribute('data-outfit'); // e.g., 'hat-1'
-            const category = getCategory(outfitId); // e.g., 'hat'
-            const outfitSrc = `images/outfit-${outfitId}.png`; // e.g., 'images/outfit-hat-1.png'
+            const outfitId = item.getAttribute('data-outfit');
+            const category = getCategory(outfitId);
+            const outfitSrc = `images/outfit-${outfitId}.png`;
             
             let overlayEl, storageKey;
 
@@ -62,26 +101,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 storageKey = 'petGlasses';
             }
 
-            // Update the specific overlay image and save
             if (overlayEl) {
                 overlayEl.src = outfitSrc;
                 overlayEl.style.display = 'block';
-                localStorage.setItem(storageKey, outfitSrc); // Save to the specific key
+                localStorage.setItem(storageKey, outfitSrc);
             }
         });
     });
 
-    // Add click listener to the remove all button
+    // Add click listener to the remove all button (Remains the same)
     removeAllBtn.addEventListener('click', () => {
-        // Clear all overlays visually
         hatOverlayEl.style.display = 'none';
         capeOverlayEl.style.display = 'none';
         glassesOverlayEl.style.display = 'none';
         
-        // Clear all storage keys
         localStorage.removeItem('petHat');
         localStorage.removeItem('petCape');
         localStorage.removeItem('petGlasses');
     });
 
-}); // End of DOMContentLoaded
+});
