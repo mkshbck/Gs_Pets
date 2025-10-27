@@ -173,7 +173,7 @@ feedBtn.addEventListener('click', () => {
     petImageEl.src = getPetImagePath('eating');
     
     // NEW: 3. Call updatePetImage to shift accessories immediately for the 'eating' state
-    updatePetImage();
+ //   updatePetImage();
     
     // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
@@ -195,7 +195,7 @@ playBtn.addEventListener('click', () => {
     petImageEl.src = getPetImagePath('play');
     
     // NEW: 3. Call updatePetImage to shift accessories immediately for the 'play' state
-    updatePetImage();
+   // updatePetImage();
     
     // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
