@@ -10,7 +10,7 @@
     "pet-dead.png": {"x": 0, "y": 19, "r": 0}
   },
   "hat": {
-    "pet-neutral.png": {"x": 0, "y": 0, "r": 0},
+    "pet-neutral.png": {"x": 0, "y": 10, "r": 0},
     "pet-hungry.png": {"x": 0, "y": 0, "r": 0},
     "pet-sad.png": {"x": 0, "y": 0, "r": 0},
     "pet-fat.png": {"x": 0, "y": 10, "r": 0},
