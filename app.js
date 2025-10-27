@@ -117,7 +117,7 @@ function updatePetImage() {
 
     // 2. APPLY SHIFTS (X, Y, and ROTATION) TO ALL ACCESSORIES
     if (petConfigData) {
-        // Extract the filename (e.g., 'pet-neutral.png')
+        // Extract the filename (e.g., 'pet-neutral.png', 'pet-eating.png')
         const filename = currentImageSrc.split('/').pop(); 
         
         const accessories = [
@@ -158,36 +158,48 @@ function checkPetStatus() {
     }
 }
 
-// Event listeners for buttons (Reverted Logic - animation will be brief)
+// Event listeners for buttons
 feedBtn.addEventListener('click', () => {
+    // 1. Update stats (in memory)
     if (hunger < 100) {
         hunger += 10;
         if (hunger > 100) {
             hunger = 100;
             weight += 5; // Pet gains weight if hunger is already full
         }
-        updateStats(); 
     }
-    // Set the eating image for the animation
-    petImageEl.src = getPetImagePath('eating'); 
+    
+    // 2. Set the eating image for the animation
+    petImageEl.src = getPetImagePath('eating');
+    
+    // NEW: 3. Call updatePetImage to shift accessories immediately for the 'eating' state
+    updatePetImage();
+    
+    // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
-        updateStats(); // This runs updatePetImage() to set the final state
+        updateStats(); // This runs updatePetImage() to set the final state based on current stats
     }, 1000);
 });
 
 playBtn.addEventListener('click', () => {
+    // 1. Update stats (in memory)
     if (happiness < 100) {
         happiness += 10;
         if (happiness > 100) {
             happiness = 100;
             strength += 5; // Pet gains strength if happiness is already full
         }
-        updateStats();
     }
-    // Set the play image for the animation
-    petImageEl.src = getPetImagePath('play'); 
+    
+    // 2. Set the play image for the animation
+    petImageEl.src = getPetImagePath('play');
+    
+    // NEW: 3. Call updatePetImage to shift accessories immediately for the 'play' state
+    updatePetImage();
+    
+    // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
-        updateStats(); // This runs updatePetImage() to set the final state
+        updateStats(); // This runs updatePetImage() to set the final state based on current stats
     }, 1000);
 });
 
