@@ -14,12 +14,18 @@
         }
 
         /* --- STYLES FOR HORIZONTAL SCROLLING GALLERY --- */
+        .selection-wrapper {
+            display: flex; /* Flex container to hold buttons and the scrollable grid */
+            align-items: center; /* Vertically center the buttons with the grid */
+            margin-top: 30px;
+        }
+
         .selection-grid {
             display: flex;
             overflow-x: scroll; 
             gap: 20px;
             padding: 20px 5px; 
-            margin-top: 30px;
+            flex-grow: 1; /* Allows the grid to take up available space */
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; 
         }
@@ -27,6 +33,24 @@
             display: none;
         }
         /* ------------------------------------------------ */
+
+        .scroll-button {
+            /* Styling to make buttons look like standard controls */
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            flex-shrink: 0; /* Prevents buttons from shrinking */
+            transition: background-color 0.2s;
+        }
+
+        .scroll-button:hover {
+            background-color: #a350e9;
+        }
 
         .pet-card {
             flex-shrink: 0; 
@@ -53,14 +77,13 @@
             margin: 0 auto 5px;
         }
         
-        /* Style for the back button (using existing button styles) */
         .back-to-game-btn {
             padding: 10px 20px;
             margin: 20px 10px 0;
             border-radius: 5px;
             font-size: 1em;
             color: #fff;
-            background-color: #3498db; /* Blue color */
+            background-color: #3498db;
             text-decoration: none;
             display: inline-block;
             text-align: center;
@@ -75,78 +98,106 @@
     <div class="pet-container selection-container">
         <h1>Choose Your Pet Character!</h1>
         
-        <div class="selection-grid">
+        <div class="selection-wrapper">
             
-            <div class="pet-card" data-pet="kitty">
-                <img src="images/animals/kitty/pet-neutral.png" alt="Kitty">
-                <h3>Kitty</h3>
-            </div>
-            <div class="pet-card" data-pet="sheep">
-                <img src="images/animals/sheep/pet-neutral.png" alt="Sheep">
-                <h3>Sheep</h3>
-            </div>
-            <div class="pet-card" data-pet="monkey">
-                <img src="images/animals/monkey/pet-neutral.png" alt="Monkey">
-                <h3>Monkey</h3>
-            </div>
-            <div class="pet-card" data-pet="cow">
-                <img src="images/animals/cow/pet-neutral.png" alt="Cow">
-                <h3>Cow</h3>
-            </div>
-            <div class="pet-card" data-pet="puppy">
-                <img src="images/animals/puppy/pet-neutral.png" alt="Puppy">
-                <h3>Puppy</h3>
-            </div>
+            <button id="scroll-left-btn" class="scroll-button">←</button>
+            
+            <div class="selection-grid" id="selection-grid">
+                
+                <div class="pet-card" data-pet="kitty">
+                    <img src="images/animals/kitty/pet-neutral.png" alt="Kitty">
+                    <h3>Kitty</h3>
+                </div>
+                <div class="pet-card" data-pet="sheep">
+                    <img src="images/animals/sheep/pet-neutral.png" alt="Sheep">
+                    <h3>Sheep</h3>
+                </div>
+                <div class="pet-card" data-pet="monkey">
+                    <img src="images/animals/monkey/pet-neutral.png" alt="Monkey">
+                    <h3>Monkey</h3>
+                </div>
+                <div class="pet-card" data-pet="cow">
+                    <img src="images/animals/cow/pet-neutral.png" alt="Cow">
+                    <h3>Cow</h3>
+                </div>
+                <div class="pet-card" data-pet="puppy">
+                    <img src="images/animals/puppy/pet-neutral.png" alt="Puppy">
+                    <h3>Puppy</h3>
+                </div>
 
-            <div class="pet-card" data-pet="bunny">
-                <img src="images/animals/bunny/pet-neutral.png" alt="Bunny">
-                <h3>Bunny</h3>
+                <div class="pet-card" data-pet="bunny">
+                    <img src="images/animals/bunny/pet-neutral.png" alt="Bunny">
+                    <h3>Bunny</h3>
+                </div>
+                <div class="pet-card" data-pet="chick">
+                    <img src="images/animals/chick/pet-neutral.png" alt="Chick">
+                    <h3>Chick</h3>
+                </div>
+                <div class="pet-card" data-pet="dragon">
+                    <img src="images/animals/dragon/pet-neutral.png" alt="Dragon">
+                    <h3>Dragon</h3>
+                </div>
+                <div class="pet-card" data-pet="panda">
+                    <img src="images/animals/panda/pet-neutral.png" alt="Panda">
+                    <h3>Panda</h3>
+                </div>
+                <div class="pet-card" data-pet="unicorn">
+                    <img src="images/animals/unicorn/pet-neutral.png" alt="Unicorn">
+                    <h3>Unicorn</h3>
+                </div>
+                
+                <div class="pet-card" data-pet="bear">
+                    <img src="images/animals/bear/pet-neutral.png" alt="Bear">
+                    <h3>Bear</h3>
+                </div>
+                <div class="pet-card" data-pet="jaguar">
+                    <img src="images/animals/jaguar/pet-neutral.png" alt="Jaguar">
+                    <h3>Jaguar</h3>
+                </div>
+                <div class="pet-card" data-pet="koala">
+                    <img src="images/animals/koala/pet-neutral.png" alt="Koala">
+                    <h3>Koala</h3>
+                </div>
+
+                <div class="pet-card" data-pet="fox">
+                    <img src="images/animals/fox/pet-neutral.png" alt="Fox">
+                    <h3>Fox</h3>
+                </div>
+                
             </div>
-            <div class="pet-card" data-pet="chick">
-                <img src="images/animals/chick/pet-neutral.png" alt="Chick">
-                <h3>Chick</h3>
-            </div>
-            <div class="pet-card" data-pet="dragon">
-                <img src="images/animals/dragon/pet-neutral.png" alt="Dragon">
-                <h3>Dragon</h3>
-            </div>
-            <div class="pet-card" data-pet="panda">
-                <img src="images/animals/panda/pet-neutral.png" alt="Panda">
-                <h3>Panda</h3>
-            </div>
-            <div class="pet-card" data-pet="unicorn">
-                <img src="images/animals/unicorn/pet-neutral.png" alt="Unicorn">
-                <h3>Unicorn</h3>
-            </div>
-            <div class="pet-card" data-pet="bear">
-                <img src="images/animals/bear/pet-neutral.png" alt="Bear">
-                <h3>Bear</h3>
-            </div>
-            <div class="pet-card" data-pet="fox">
-                <img src="images/animals/fox/pet-neutral.png" alt="Fox">
-                <h3>Fox</h3>
-            </div>
-            <div class="pet-card" data-pet="koala">
-                <img src="images/animals/koala/pet-neutral.png" alt="Koala">
-                <h3>Koala</h3>
-            </div>
-            <div class="pet-card" data-pet="jaguar">
-                <img src="images/animals/jaguar/pet-neutral.png" alt="Jaguar">
-                <h3>Jaguar</h3>
-            </div>
-            <div class="pet-card" data-pet="polarbear">
-                <img src="images/animals/polarbear/pet-neutral.png" alt="Polar Bear">
-                <h3>Polar Bear</h3>
-            </div>
+            
+            <button id="scroll-right-btn" class="scroll-button">→</button>
             
         </div>
-        
         <p style="margin-top: 30px;">Select an animal to start playing!</p>
 
         <a href="index.html" class="back-to-game-btn">Back to Game</a>
     </div>
 
     <script>
+        // Get the scrolling element and buttons
+        const grid = document.getElementById('selection-grid');
+        const scrollLeftBtn = document.getElementById('scroll-left-btn');
+        const scrollRightBtn = document.getElementById('scroll-right-btn');
+        // Define how much to scroll (e.g., the width of one card + gap)
+        const scrollAmount = 150; 
+
+        // Add scroll handlers
+        scrollLeftBtn.addEventListener('click', () => {
+            grid.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        scrollRightBtn.addEventListener('click', () => {
+            grid.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add click handlers to save the pet selection
         document.querySelectorAll('.pet-card').forEach(card => {
             card.addEventListener('click', () => {
                 const petType = card.getAttribute('data-pet');
