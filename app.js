@@ -168,6 +168,9 @@ feedBtn.addEventListener('click', () => {
             weight += 5; // Pet gains weight if hunger is already full
         }
     }
+
+    //mps moved here so the accessories are shifted before the image is shown to avoid delay (idea courtesy of Gemeni)
+    updatePetImage();
     
     // 2. Set the eating image for the animation
     petImageEl.src = getPetImagePath('eating');
@@ -190,6 +193,8 @@ playBtn.addEventListener('click', () => {
             strength += 5; // Pet gains strength if happiness is already full
         }
     }
+    //mps moved here so the accessories are shifted before the image is shown to avoid delay (idea courtesy of Gemeni)
+    updatePetImage();
     
     // 2. Set the play image for the animation
     petImageEl.src = getPetImagePath('play');
