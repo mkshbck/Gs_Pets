@@ -17,19 +17,45 @@ const petImageEl = document.getElementById('pet-image');
 const feedBtn = document.getElementById('feed-btn');
 const playBtn = document.getElementById('play-btn');
 
-// NEW: Variable to hold the loaded configuration data for the current pet
 let petConfigData = null;
-
-// NEW: Get the currently selected pet type from localStorage
 const selectedPet = localStorage.getItem('selectedPet') || 'kitty';
 
-// Helper function to dynamically build the path for the current pet
 function getPetImagePath(state) {
-    // Returns path with the "pet-" prefix, e.g., 'images/animals/kitty/pet-neutral.png'
     return `images/animals/${selectedPet}/pet-${state}.png`;
 }
 
-// --- NEW FUNCTION: Load Pet Configuration (X, Y, and Rotation data) ---
+// --- MODIFIED FUNCTION: Accessory Shifting by State ---
+// Now takes the pet state (e.g., 'eating', 'play', 'neutral') as an argument
+function applyShiftsByState(state) {
+    if (!petConfigData) return;
+
+    // Construct the filename that the config.json uses (e.g., 'pet-eating.png')
+    const filename = `pet-${state}.png`; 
+    
+    const accessories = [
+        { id: 'hat-overlay', category: 'hat' },
+        { id: 'cape-overlay', category: 'cape' },
+        { id: 'glasses-overlay', category: 'glasses' }
+    ];
+
+    accessories.forEach(acc => {
+        const element = document.getElementById(acc.id);
+        if (element) {
+            const shiftData = petConfigData[acc.category]?.[filename] || { x: 0, y: 0, r: 0 };
+            
+            const shiftX = shiftData.x || 0;
+            const shiftY = shiftData.y || 0;
+            const rotate = shiftData.r || 0;
+            
+            // Apply the combined transformation
+            element.style.transform = 
+                `translateX(${shiftX}%) translateY(${shiftY}%) rotate(${rotate}deg)`;
+        }
+    });
+}
+// ----------------------------------------------------
+
+
 async function loadPetConfig() {
     const configPath = `images/animals/${selectedPet}/config.json`;
     try {
@@ -39,17 +65,14 @@ async function loadPetConfig() {
         }
         petConfigData = await response.json();
         console.log("Pet configuration loaded successfully:", petConfigData);
-        // Once config is loaded, update image and outfits to apply initial offsets
         updateStats();
     } catch (error) {
         console.error("Error loading pet config:", error);
-        // Fallback: If config fails to load, accessories won't shift, but game will continue.
     }
 }
-loadPetConfig(); // Execute on script load
-// ------------------------------------------
+loadPetConfig();
 
-// --- OUTFIT OVERLAY SETUP FOR MAIN PAGE (MULTI-ITEM LOGIC) ---
+
 function loadOutfitsToMainPage() {
     const outfitKeys = [
         { key: 'petHat', id: 'hat-overlay' },
@@ -62,18 +85,15 @@ function loadOutfitsToMainPage() {
         const existingEl = document.getElementById(item.id);
 
         if (savedSrc) {
-            // Create element if it doesn't exist
             if (!existingEl) {
                 const outfitOverlay = document.createElement('img');
                 outfitOverlay.id = item.id;
                 outfitOverlay.src = savedSrc;
                 petDisplayEl.appendChild(outfitOverlay);
             } else {
-                // Update element if it exists
                 existingEl.src = savedSrc;
             }
         } else {
-            // Remove the element if the item was removed from storage
             if (existingEl) {
                  existingEl.remove();
             }
@@ -81,7 +101,6 @@ function loadOutfitsToMainPage() {
     });
 }
 loadOutfitsToMainPage();
-// -------------------------------------------------------------
 
 // Update pet's stats on the screen
 function updateStats() {
@@ -96,58 +115,31 @@ function updateStats() {
 
 // Change pet image based on its state, including weight and strength
 function updatePetImage() {
-    let currentImageSrc;
+    let petState;
     
-    // 1. DETERMINE CURRENT PET STATE IMAGE
+    // 1. DETERMINE CURRENT PET STATE (This logic determines the default state)
     if (isDead) {
-        currentImageSrc = getPetImagePath('dead');
+        petState = 'dead';
     } else if (weight > 75) {
-        currentImageSrc = getPetImagePath('fat'); 
+        petState = 'fat'; 
     } else if (strength > 75) {
-        currentImageSrc = getPetImagePath('strong'); 
+        petState = 'strong'; 
     } else if (hunger <= 30) {
-        currentImageSrc = getPetImagePath('hungry');
+        petState = 'hungry';
     } else if (happiness <= 30) {
-        currentImageSrc = getPetImagePath('sad');
+        petState = 'sad';
     } else {
-        currentImageSrc = getPetImagePath('neutral');
+        petState = 'neutral';
     }
 
-    petImageEl.src = currentImageSrc;
+    // 2. APPLY SHIFTS: Shift accessories BEFORE changing the image source
+    applyShiftsByState(petState);
 
-    // 2. APPLY SHIFTS (X, Y, and ROTATION) TO ALL ACCESSORIES
-    if (petConfigData) {
-        // Extract the filename (e.g., 'pet-neutral.png', 'pet-eating.png')
-        const filename = currentImageSrc.split('/').pop(); 
-        
-        const accessories = [
-            { id: 'hat-overlay', category: 'hat' },
-            { id: 'cape-overlay', category: 'cape' },
-            { id: 'glasses-overlay', category: 'glasses' }
-        ];
-
-        accessories.forEach(acc => {
-            const element = document.getElementById(acc.id);
-            if (element) {
-                // Get the shift object from the loaded JSON data. Default to {x:0, y:0, r:0} if state is missing.
-                const shiftData = petConfigData[acc.category]?.[filename] || { x: 0, y: 0, r: 0 };
-                
-                const shiftX = shiftData.x || 0;
-                const shiftY = shiftData.y || 0;
-                const rotate = shiftData.r || 0;
-                
-                // Build a single transform string combining all three movements
-                element.style.transform = 
-                    `translateX(${shiftX}%) translateY(${shiftY}%) rotate(${rotate}deg)`;
-            }
-        });
-    }
-    // -------------------------------
+    // 3. Set the final image source
+    petImageEl.src = getPetImagePath(petState);
 }
 
-// Check for death conditions
 function checkPetStatus() {
-    // Pet dies if hunger/happiness hits 0 OR if weight hits 100
     if (hunger <= 0 || happiness <= 0 || weight >= 100) {
         isDead = true;
         alert('Your pet has passed away!');
@@ -158,29 +150,26 @@ function checkPetStatus() {
     }
 }
 
-// Event listeners for buttons
+// Event listeners for buttons - SHIFTING LOGIC CORRECTED
 feedBtn.addEventListener('click', () => {
     // 1. Update stats (in memory)
     if (hunger < 100) {
         hunger += 10;
         if (hunger > 100) {
             hunger = 100;
-            weight += 5; // Pet gains weight if hunger is already full
+            weight += 5; 
         }
     }
-
-    //mps moved here so the accessories are shifted before the image is shown to avoid delay (idea courtesy of Gemeni)
-    updatePetImage();
     
-    // 2. Set the eating image for the animation
+    // 2. SHIFT ACCESSORIES FOR THE ANIMATION STATE
+    applyShiftsByState('eating');
+    
+    // 3. Set the eating image for the animation (This now happens after shifting)
     petImageEl.src = getPetImagePath('eating');
-    
-    // NEW: 3. Call updatePetImage to shift accessories immediately for the 'eating' state
- //   updatePetImage();
     
     // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
-        updateStats(); // This runs updatePetImage() to set the final state based on current stats
+        updateStats(); // This calls updatePetImage() to determine and set the new default state
     }, 1000);
 });
 
@@ -190,21 +179,19 @@ playBtn.addEventListener('click', () => {
         happiness += 10;
         if (happiness > 100) {
             happiness = 100;
-            strength += 5; // Pet gains strength if happiness is already full
+            strength += 5; 
         }
     }
-    //mps moved here so the accessories are shifted before the image is shown to avoid delay (idea courtesy of Gemeni)
-    updatePetImage();
     
-    // 2. Set the play image for the animation
+    // 2. SHIFT ACCESSORIES FOR THE ANIMATION STATE
+    applyShiftsByState('play');
+    
+    // 3. Set the play image for the animation (This now happens after shifting)
     petImageEl.src = getPetImagePath('play');
-    
-    // NEW: 3. Call updatePetImage to shift accessories immediately for the 'play' state
-   // updatePetImage();
     
     // 4. Update stats display and revert to final state after delay
     setTimeout(() => {
-        updateStats(); // This runs updatePetImage() to set the final state based on current stats
+        updateStats(); // This calls updatePetImage() to determine and set the new default state
     }, 1000);
 });
 
