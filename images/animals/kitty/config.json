@@ -3,7 +3,7 @@
     "pet-neutral.png": {"x": 0, "y": 10, "r": 0},
     "pet-hungry.png": {"x": 0, "y": 8, "r": 0},
     "pet-sad.png": {"x": 0, "y": 6, "r": 0},
-    "pet-fat.png": {"x": 0, "y": 6, "r": 0},
+    "pet-fat.png": {"x": -2, "y": 6, "r": 0},
     "pet-strong.png": {"x": 0, "y": 0, "r": 0},
     "pet-eating.png": {"x": 0, "y": 5, "r": 0},
     "pet-play.png": {"x": 0, "y": 0, "r": 0},
