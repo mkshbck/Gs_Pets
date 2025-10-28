@@ -7,7 +7,7 @@
     "pet-strong.png": {"x": 0, "y": 0, "r": 0},
     "pet-eating.png": {"x": 0, "y": 5, "r": 0},
     "pet-play.png": {"x": 0, "y": 0, "r": 0},
-    "pet-dead.png": {"x": 0, "y": 19, "r": 0}
+    "pet-dead.png": {"x": -2, "y": 19, "r": 0}
   },
   "hat": {
     "pet-neutral.png": {"x": 0, "y": 0, "r": 0},
