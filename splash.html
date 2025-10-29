@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Genevieve's Virtual Pets!</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensures it covers the whole screen */
+            background-color: #f0e6f2; /* Matches your current body background */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .splash-container {
+            text-align: center;
+            animation: fadeIn 1s ease-out forwards; /* Fade in animation */
+        }
+        .splash-container img {
+            max-width: 90%; /* Adjust as needed */
+            max-height: 80vh; /* Adjust as needed */
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <img src="images/GenevievesVirtualPets.png" alt="Genevieve's Virtual Pets Splash Screen">
+    </div>
+
+    <script>
+        // Set the duration for the splash screen (e.g., 3000 milliseconds = 3 seconds)
+        const splashDuration = 3000; 
+
+        setTimeout(() => {
+            // Redirect to the main game page after the splash duration
+            window.location.href = 'index.html';
+        }, splashDuration);
+    </script>
+</body>
+</html>
