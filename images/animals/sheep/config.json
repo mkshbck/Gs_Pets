@@ -7,7 +7,7 @@
     "pet-strong.png": {"x": 0, "y": 0, "r": 0},
     "pet-eating.png": {"x": 0, "y": 5, "r": 0},
     "pet-play.png": {"x": -5, "y": 0, "r": -10},
-    "pet-dead.png": {"x": 0, "y": 18, "r": 0}
+    "pet-dead.png": {"x": -5, "y": 5, "r": 0}
   },
   "hat": {
     "pet-neutral.png": {"x": 0, "y": 10, "r": 0},
@@ -17,7 +17,7 @@
     "pet-strong.png": {"x": 0, "y": 0, "r": 0},
     "pet-eating.png": {"x": 0, "y": 5, "r": 0},
     "pet-play.png": {"x": 0, "y": 0, "r": 0},
-    "pet-dead.png": {"x": 0, "y": 5, "r": 0}
+    "pet-dead.png": {"x": -5, "y": 5, "r": 0}
   },
   "cape": {
     "pet-neutral.png": {"x": 0, "y": 17, "r": 0},
@@ -27,6 +27,6 @@
     "pet-strong.png": {"x": 0, "y": 0, "r": 0},
     "pet-eating.png": {"x": 0, "y": 5, "r": 0},
     "pet-play.png": {"x": 0, "y": 10, "r": 0},
-    "pet-dead.png": {"x": 0, "y": 20, "r": 0}
+    "pet-dead.png": {"x": -5, "y": 20, "r": 0}
   }
 }
