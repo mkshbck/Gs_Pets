@@ -22,8 +22,8 @@
             max-width: 90%; 
             max-height: 80vh; 
             height: auto;
-            /* NEW: Apply the spin animation */
-            animation: spin 2s linear infinite; /* Spin continuously for 2s per rotation */
+            /* UPDATED: Spin only once, then stay at the final state */
+            animation: spin 2s linear 1 forwards; 
         }
 
         @keyframes fadeIn {
@@ -31,7 +31,7 @@
             to { opacity: 1; }
         }
 
-        /* NEW: Spin animation keyframes */
+        /* Spin animation keyframes */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -44,9 +44,11 @@
     </div>
 
     <script>
+        // Set the duration for the splash screen (e.g., 3000 milliseconds = 3 seconds)
         const splashDuration = 3000; 
 
         setTimeout(() => {
+            // Redirect to the main game page after the splash duration
             window.location.href = 'index.html';
         }, splashDuration);
     </script>
