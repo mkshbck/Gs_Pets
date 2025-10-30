@@ -115,7 +115,7 @@ body {
     position: fixed; /* Keep it in the same place even if the user scrolls (though index.html is currently non-scrollable) */
     top: 10px;      /* 10 pixels from the top edge */
     left: 10px;     /* 10 pixels from the left edge */
-    width: 10px;    /* A small, fixed size */
+    width: 100px;    /* A small, fixed size */
     max-width: 60px; /* NEW: Added max-width */
     min-width: 60px; /* NEW: Added min-width */
     height: auto;
