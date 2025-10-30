@@ -116,8 +116,8 @@ body {
     top: 10px;      /* 10 pixels from the top edge */
     left: 10px;     /* 10 pixels from the left edge */
     width: 100px;    /* A small, fixed size */
-    max-width: 60px; /* NEW: Added max-width */
-    min-width: 60px; /* NEW: Added min-width */
+    max-width: 100px; /* NEW: Added max-width */
+    min-width: 100px; /* NEW: Added min-width */
     height: auto;
     z-index: 100;   /* Ensure it appears above all other elements */
     opacity: 0.75;  /* Make it slightly transparent so it doesn't distract */
