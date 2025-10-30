@@ -10,23 +10,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Ensures it covers the whole screen */
-            background-color: #f0e6f2; /* Matches your current body background */
-            overflow: hidden; /* Prevent scrollbars */
+            min-height: 100vh; 
+            background-color: #f0e6f2; 
+            overflow: hidden; 
         }
         .splash-container {
             text-align: center;
-            animation: fadeIn 1s ease-out forwards; /* Fade in animation */
+            animation: fadeIn 1s ease-out forwards;
         }
         .splash-container img {
-            max-width: 90%; /* Adjust as needed */
-            max-height: 80vh; /* Adjust as needed */
+            max-width: 90%; 
+            max-height: 80vh; 
             height: auto;
+            /* NEW: Apply the spin animation */
+            animation: spin 2s linear infinite; /* Spin continuously for 2s per rotation */
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* NEW: Spin animation keyframes */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -36,11 +44,9 @@
     </div>
 
     <script>
-        // Set the duration for the splash screen (e.g., 3000 milliseconds = 3 seconds)
         const splashDuration = 3000; 
 
         setTimeout(() => {
-            // Redirect to the main game page after the splash duration
             window.location.href = 'index.html';
         }, splashDuration);
     </script>
